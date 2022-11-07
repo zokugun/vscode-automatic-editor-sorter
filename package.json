@@ -2,7 +2,7 @@
 	"name": "automatic-editor-sorter",
 	"displayName": "Automatic Editor Sorter",
 	"description": "Automatically sort yours editors",
-	"version": "0.0.0",
+	"version": "0.1.0",
 	"author": {
 		"name": "Baptiste Augrain",
 		"email": "daiyam@zokugun.org"
