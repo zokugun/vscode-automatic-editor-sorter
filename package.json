@@ -1,0 +1,125 @@
+{
+	"name": "automatic-editor-sorter",
+	"displayName": "Automatic Editor Sorter",
+	"description": "Automatically sort yours editors",
+	"version": "0.0.0",
+	"author": {
+		"name": "Baptiste Augrain",
+		"email": "daiyam@zokugun.org"
+	},
+	"publisher": "zokugun",
+	"license": "MIT",
+	"homepage": "https://github.com/zokugun/vscode-automatic-editor-sorter",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/zokugun/vscode-automatic-editor-sorter.git"
+	},
+	"bugs": {
+		"url": "https://github.com/zokugun/vscode-automatic-editor-sorter/issues"
+	},
+	"engines": {
+		"vscode": "^1.23.0"
+	},
+	"main": "./lib/index.js",
+	"browser": "./lib/index.js",
+	"scripts": {
+		"bundle": "webpack",
+		"commit": "cz",
+		"compile": "tsc -p src",
+		"lint": "xo",
+		"prepare": "husky install; fixpack || true",
+		"release": "release-it",
+		"vscode:prepublish": "npm run compile && npm run bundle",
+		"watch": "tsc-watch -p src --onSuccess 'npm run bundle'"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"@commitlint/cli": "^17.0.3",
+		"@commitlint/config-conventional": "^17.0.3",
+		"@types/node": "^16.11.45",
+		"@types/vscode": "^1.23.0",
+		"commitizen": "^4.2.5",
+		"fixpack": "^4.0.0",
+		"husky": "^8.0.1",
+		"lint-staged": "^13.0.3",
+		"path-browserify": "^1.0.1",
+		"process": "^0.11.10",
+		"release-it": "^15.3.0",
+		"tsc-watch": "^5.0.3",
+		"typescript": "^4.2.4",
+		"webpack": "^5.74.0",
+		"webpack-cli": "^4.10.0",
+		"xo": "^0.48.0"
+	},
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"capabilities": {
+		"virtualWorkspaces": true,
+		"untrustedWorkspaces": {
+			"supported": true
+		}
+	},
+	"contributes": {
+		"configuration": {
+			"title": "Automatic Editor Sorter",
+			"properties": {
+				"automaticEditorSorter.enabled": {
+					"title": "Enabled",
+					"type": "boolean",
+					"default": true,
+					"description": "Controls whether open editors are sorted or not."
+				},
+				"automaticEditorSorter.order": {
+					"title": "Sort Order",
+					"type": "string",
+					"default": "asc",
+					"description": "Controls in which direction the open editors are sorted.",
+					"enum": [
+						"asc",
+						"desc"
+					],
+					"enumDescriptions": [
+						"The open editors are sorted from A to Z.",
+						"The open editors are sorted from Z to A."
+					]
+				},
+				"automaticEditorSorter.rule": {
+					"title": "Sort Rule",
+					"type": "string",
+					"default": "name",
+					"description": "Controls how the open editors are sorted.",
+					"enum": [
+						"absolute",
+						"name",
+						"name,absolute"
+					],
+					"enumDescriptions": [
+						"The open editors are sorted by their absolute path.",
+						"The open editors are sorted by their name then, by their parent's name.",
+						"The open editors are sorted by their name then, by their absolute path."
+					]
+				}
+			}
+		}
+	},
+	"extensionKind": [
+		"ui",
+		"workspace"
+	],
+	"icon": "icon.png",
+	"galleryBanner": {
+		"color": "#ffffff",
+		"theme": "light"
+	},
+	"categories": [
+		"Other"
+	],
+	"keywords": [
+		"editor",
+		"sort",
+		"sorter",
+		"sorting",
+		"tab"
+	]
+}
