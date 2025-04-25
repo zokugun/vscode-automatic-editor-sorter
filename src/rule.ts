@@ -1,5 +1,5 @@
 import path from 'path';
-import vscode from 'vscode';
+import type vscode from 'vscode';
 
 export type Rule = (a: vscode.Uri, b: vscode.Uri) => number;
 
@@ -12,7 +12,7 @@ function sortWithBasename(a: string, b: string): number { // {{{
 	const bName = path.basename(b);
 
 	if(aName === bName) {
-		return sortWithBasename(path.resolve(a, '..'), path.resolve(b, '..'))
+		return sortWithBasename(path.resolve(a, '..'), path.resolve(b, '..'));
 	}
 	else {
 		return aName.localeCompare(bName);

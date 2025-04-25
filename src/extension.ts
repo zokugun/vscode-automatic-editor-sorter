@@ -1,7 +1,7 @@
 import vscode from 'vscode';
 import pkg from '../package.json';
-import { configure, listen } from './listen';
-import { Disposable } from './utils/disposable';
+import { configure, listen } from './listen.js';
+import { Disposable } from './utils/disposable.js';
 
 const CONFIG_KEY = 'automaticEditorSorter';
 const VERSION_KEY = 'version';
@@ -18,7 +18,7 @@ function setup() { // {{{
 	$context!.subscriptions.push($disposable);
 
 	if(enabled) {
-		configure(config)
+		configure(config);
 
 		vscode.window.tabGroups.onDidChangeTabs(listen);
 	}

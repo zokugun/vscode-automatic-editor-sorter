@@ -2,3 +2,4 @@ node_modules
 lib
 out
 *.vsix
+.vscode-test/

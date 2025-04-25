@@ -1,7 +1,7 @@
 import vscode from 'vscode';
 
 export class Disposable extends vscode.Disposable {
-	private subscriptions: vscode.Disposable[] = [];
+	private readonly subscriptions: vscode.Disposable[] = [];
 
 	constructor() {
 		super(() => {

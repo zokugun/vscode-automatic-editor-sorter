@@ -1,10 +1,10 @@
-export function debounce<T extends Function>(fn: T, wait: number): T { // {{{
-	let fnTimer;
+export function debounce<T extends (..._) => unknown>(func: T, wait: number): T { // {{{
+	let funcTimer: NodeJS.Timeout | undefined;
 
-	let callable = (...args) => {
-		clearTimeout(fnTimer);
-		fnTimer = setTimeout(() => fn(...args), wait);
+	const callable = (...args: unknown[]) => {
+		clearTimeout(funcTimer);
+		funcTimer = setTimeout(() => func(...args), wait);
 	};
 
-	return <T>(<any>callable);
-}; // }}}
+	return callable as T;
+} // }}}

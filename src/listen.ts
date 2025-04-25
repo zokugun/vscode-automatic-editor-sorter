@@ -1,7 +1,7 @@
 import vscode from 'vscode';
-import { getOrder, Order } from './order';
-import { getRule, Rule } from './rule';
-import { debounce } from './utils/debounce';
+import { getOrder, type Order } from './order.js';
+import { getRule, type Rule } from './rule.js';
+import { debounce } from './utils/debounce.js';
 
 type Tab = {
 	id: string;
@@ -13,7 +13,7 @@ let $group: vscode.TabGroup | undefined;
 let $modified: boolean = false;
 let $opened: string | undefined;
 let $order: Order | undefined;
-let $pinneds: string[] = [];
+const $pinneds: string[] = [];
 let $rule: Rule | undefined;
 let $tabs: Tab[] | undefined;
 
@@ -37,9 +37,9 @@ function getId(tab: vscode.Tab): string { // {{{
 		return `notebook-diff:${tab.input.notebookType}/${tab.input.original.toString()}/${tab.input.modified.toString()}`;
 	}
 	if(tab.input instanceof vscode.TabInputTerminal) {
-		return `terminal:${tab}`;
+		return `terminal:${tab as any as string}`;
 	}
-	return `unknwon:${tab}`;
+	return `unknwon:${tab as any as string}`;
 } // }}}
 
 function getPath(tab: vscode.Tab): vscode.Uri | undefined { // {{{
@@ -62,7 +62,7 @@ function getPath(tab: vscode.Tab): vscode.Uri | undefined { // {{{
 
 function move(id: string): void { // {{{
 	for(const [index, tab] of $tabs!.entries()) {
-		if(id == tab.id) {
+		if(id === tab.id) {
 			void vscode.commands.executeCommand('moveActiveEditor', {
 				to: 'position',
 				value: index + 1,
@@ -71,11 +71,11 @@ function move(id: string): void { // {{{
 	}
 } // }}}
 
-const sortChanged = debounce(function(tab: vscode.Tab): void { // {{{
+const sortChanged = debounce((tab: vscode.Tab): void => { // {{{
 	// console.log(tab.label, tab.isActive, tab.isPreview, tab.isPinned);
 
 	if(tab.isActive && !tab.isPreview) {
-		var id = getId(tab);
+		const id = getId(tab);
 
 		if(tab.isPinned) {
 			if(!$pinneds.includes(id)) {
@@ -117,7 +117,7 @@ function sortGroup(group: vscode.TabGroup): void { // {{{
 			id: getId(tab),
 			path: getPath(tab),
 			sticky: tab.isPinned,
-		})
+		});
 	}
 
 	tabs.sort((a, b): number => {
@@ -129,7 +129,7 @@ function sortGroup(group: vscode.TabGroup): void { // {{{
 		}
 
 		return $order!($rule!(a.path, b.path));
-	})
+	});
 
 	$tabs = tabs;
 	$group = group;
@@ -161,4 +161,4 @@ export function listen(event: vscode.TabChangeEvent): void { // {{{
 	for(const tab of event.changed) {
 		sortChanged(tab);
 	}
-}; // }}}
+} // }}}
