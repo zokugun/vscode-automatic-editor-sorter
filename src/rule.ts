@@ -12,7 +12,12 @@ function sortWithBasename(a: string, b: string): number { // {{{
 	const bName = path.basename(b);
 
 	if(aName === bName) {
-		return sortWithBasename(path.resolve(a, '..'), path.resolve(b, '..'));
+		if(aName.length === 0) {
+			return 0;
+		}
+		else {
+			return sortWithBasename(path.resolve(a, '..'), path.resolve(b, '..'));
+		}
 	}
 	else {
 		return aName.localeCompare(bName);
