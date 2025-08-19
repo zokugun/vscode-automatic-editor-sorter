@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.1.2 | 2025-08-19
+- fix looping
+
 ## v0.1.1 | 2025-04-25
 - update dependencies
 
