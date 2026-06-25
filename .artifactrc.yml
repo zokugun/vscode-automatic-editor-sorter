@@ -1,11 +1,14 @@
+$schema: https://raw.githubusercontent.com/zokugun/artifact/v0.12.0/schemas/v4/install.json
 artifacts:
-  - name: "@daiyam/artifact-lang-js"
-    version: 0.6.1
-  - name: "@daiyam/artifact-lang-ts"
-    version: 0.5.6
-  - name: "@daiyam/artifact-vsx-ts"
-    version: 0.7.2
-  - name: "@daiyam/artifact-vsx-zokugun"
-    version: 0.3.1
-  - name: "@daiyam/artifact-vsx-bundle-webpack"
-    version: 0.2.1
+  "@daiyam/artifact-lang-js":
+    version: 0.14.4
+    provides:
+      - "20"
+  "@daiyam/artifact-lang-ts":
+    version: 0.10.5
+  "@daiyam/artifact-vsx-ts":
+    version: 0.11.14
+  "@daiyam/artifact-vsx-zokugun":
+    version: 0.4.2
+  "@daiyam/artifact-vsx-bundle-ncc":
+    version: 0.4.1

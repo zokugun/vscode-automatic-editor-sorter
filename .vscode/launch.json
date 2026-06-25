@@ -12,21 +12,7 @@
 			"outFiles": [
 				"${workspaceFolder}/lib/**/*.js"
 			],
-			"preLaunchTask": "npm: watch"
-		},
-		{
-			"name": "Web Extension",
-			"type": "pwa-extensionHost",
-			"debugWebWorkerHost": true,
-			"request": "launch",
-			"args": [
-				"--extensionDevelopmentPath=${workspaceFolder}",
-				"--extensionDevelopmentKind=web"
-			],
-			"outFiles": [
-				"${workspaceFolder}/lib/**/*.js"
-			],
-			"preLaunchTask": "npm: watch"
+			"preLaunchTask": "npm: watch:src"
 		}
 	]
 }
